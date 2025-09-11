@@ -1,26 +1,22 @@
-import abc
-class RiceProduct(abc.ABC):
-    @abc.abstractmethod
+
+class RiceProduct():
     def display_info(self):
         pass
 
-    @abc.abstractmethod
     def get_type(self):
         pass
 
-    @abc.abstractmethod
     def get_quantity(self):
         pass
 
-    @abc.abstractmethod
     def get_quality(self):
         pass
 
 # Concrete Classes for Specific Rice Types
-class BasmatiRice(RiceProduct):
+class ChampionsRice(RiceProduct):
     
     def __init__(self, quantity, quality):
-        self.rice_type = 'Basmati'
+        self.rice_type = 'Champions'
         self.quantity = quantity
         self.quality = quality
 
@@ -36,9 +32,9 @@ class BasmatiRice(RiceProduct):
     def get_quality(self):
         return self.quality
 
-class JasmineRice(RiceProduct):
+class PerfumedRice(RiceProduct):
     def __init__(self, quantity, quality):
-        self.rice_type = 'Jasmine'
+        self.rice_type = 'perfumed rice'
         self.quantity = quantity
         self.quality = quality
 
@@ -54,9 +50,9 @@ class JasmineRice(RiceProduct):
     def get_quality(self):
         return self.quality
 
-class BrownRice(RiceProduct):
+class NdopRice(RiceProduct):
     def __init__(self, quantity, quality):
-        self.rice_type = 'Brown'
+        self.rice_type = 'Ndop'
         self.quantity = quantity
         self.quality = quality
 
@@ -73,31 +69,22 @@ class BrownRice(RiceProduct):
         return self.quality
 
 # Abstract Factory Class
-class RiceFactory(abc.ABC):
-    """
-    Abstract Factory class for creating different types of RiceProduct objects.
-    Defines the interface for the factory method.
-    """
-    @abc.abstractmethod
+class RiceFactory():
     def create_rice(self, quantity, quality):
-        """
-        Abstract method to create a RiceProduct object.
-        Concrete factories must implement this method to create specific rice types.
-        """
         pass
 
 # Concrete Factory Classes
-class BasmatiRiceFactory(RiceFactory):
+class ChampionsRiceFactory(RiceFactory):
     def create_rice(self, quantity, quality):
-        return BasmatiRice(quantity, quality)
+        return ChampionsRice(quantity, quality)
 
-class JasmineRiceFactory(RiceFactory):
+class NdopRiceFactory(RiceFactory):
     def create_rice(self, quantity, quality):
-        return JasmineRice(quantity, quality)
+        return NdopRice(quantity, quality)
 
-class BrownRiceFactory(RiceFactory):
+class PerfumedRiceFactory(RiceFactory):
     def create_rice(self, quantity, quality):
-        return BrownRice(quantity, quality)
+        return PerfumedRice(quantity, quality)
 
 # Warehouse Class to manage inventory
 class Warehouse:
@@ -145,14 +132,14 @@ def run_warehouse_interface():
     warehouse = Warehouse() # Get the singleton instance
 
     # Instantiate concrete factories
-    basmati_factory = BasmatiRiceFactory()
-    jasmine_factory = JasmineRiceFactory()
-    brown_factory = BrownRiceFactory()
+    Champions_factory = ChampionsRiceFactory()
+    Ndop_factory = NdopRiceFactory()
+    Perfumed_factory = PerfumedRiceFactory()
 
     factories = {
-        'basmati': basmati_factory,
-        'jasmine': jasmine_factory,
-        'brown': brown_factory
+        'champions': Champions_factory,
+        'ndop': Ndop_factory,
+        'perfumed': Perfumed_factory
     }
 
     while True:
@@ -164,7 +151,7 @@ def run_warehouse_interface():
         choice = input("Enter your choice (1-3): ")
 
         if choice == '1':
-            print("\nAvailable Rice Types: Basmati, Jasmine, Brown")
+            print("\nAvailable Rice Types: Champions, Ndop, perfumed rice")
             rice_type_input = input("Enter the type of rice to add: ").lower()
 
             if rice_type_input in factories:
