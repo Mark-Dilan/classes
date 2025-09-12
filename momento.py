@@ -2,13 +2,16 @@ class Memento:
   
   def __init__(self, state):
     self._state = list(state)
-
+    
   def get_state(self):
     return self._state
+  def name(self):
+      self.manager.my_name('Dilan')
 
 class TodoList:
     def __init__(self):
         self._tasks = []
+        self.momento=Memento().name()
 
     def add_task(self, task):
         if not isinstance(task, str) or not task:
@@ -19,6 +22,7 @@ class TodoList:
 
     def remove_task(self, task):
         try:
+            Memento(self._tasks)
             self._tasks.remove(task)
             print(f"Task removed: '{task}'")
         except ValueError:
@@ -109,4 +113,5 @@ def run_todo_interface():
         else:
             print("Invalid choice. Please enter a number between 1 and 6.") 
 
+if __name__ == "__main__":
     run_todo_interface()
