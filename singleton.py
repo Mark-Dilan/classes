@@ -1,12 +1,13 @@
 class SubjectMarksManager:
     _instance = None
-
+    
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(SubjectMarksManager, cls).__new__(cls)
             cls._instance.subject_marks = {}
         return cls._instance
-
+    def my_name(self,name):
+        print(f'may name is {name}')
     def add_mark(self, subject_name, subject_mark):
         self.subject_marks[subject_name] = subject_mark
         print(f"Added mark for {subject_name}: {subject_mark}")

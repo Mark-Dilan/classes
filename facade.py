@@ -107,10 +107,6 @@ item_prices = {
 
 # Command-line interface function
 def run_ordering_interface():
-    """
-    Provides a command-line interface to interact with the FoodOrderingFacade.
-    Allows users to place orders through the simplified interface.
-    """
     facade = FoodOrderingFacade() # Create an instance of the Facade
 
     print("\n--- Food Ordering System ---")
@@ -169,6 +165,5 @@ def run_ordering_interface():
         else:
             print("Invalid choice. Please enter a number between 1 and 2.")
 
-# Run the interface if the script is executed directly
 if __name__ == "__main__":
     run_ordering_interface()
